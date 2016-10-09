@@ -64,6 +64,14 @@ import java.util.*;
  */
 public class Chromosome
     extends BaseChromosome {
+    /*=====================================================================
+     * 
+     ======================================================================*/
+    private int mLifetime = 0;
+    
+    
+    
+    
   /** String containing the CVS revision. Read out via reflection!*/
   private final static String CVS_REVISION = "$Revision: 1.105 $";
 
@@ -1122,13 +1130,12 @@ public class Chromosome
     return m_multiObjective;
   }
 
-public void setLifetime(int nLifetime) {
-    // TODO Auto-generated method stub
-    
-}
+  public int m_nLifetime;
+  public void setLifetime(int nLifetime){
+       m_nLifetime = nLifetime;
+  }
+  public int getLifetime(){
+       return m_nLifetime;
+  }
 
-public int getLifetime() {
-    // TODO Auto-generated method stub
-    return 0;
-}
 }

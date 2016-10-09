@@ -32,10 +32,15 @@ public class LifeTimeConfiguration extends Configuration implements ICloneable{
             setBreeder(new GABreeder());
             setRandomGenerator(new StockRandomGenerator());
             setEventManager(new EventManager());
-            BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(
+            /*
+             * 因为存在lifetime的消除机制，所有在本次算法中，不需要每次在运行自然选择，来挑选出个体
+             * 在configuration.java文件中的1126行删除了natural selector 必须大于等于0的判定条件
+             * 运行成功了，但是结果跑不对了
+             */
+           /* BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(
                 this, 0.90d);
             bestChromsSelector.setDoubletteChromosomesAllowed(true);
-            addNaturalSelector(bestChromsSelector, false);
+            addNaturalSelector(bestChromsSelector, false);*/
             setMinimumPopSizePercent(0);
             setSelectFromPrevGen(1.0d);
             setKeepPopulationSizeConstant(false);//dynamic population size

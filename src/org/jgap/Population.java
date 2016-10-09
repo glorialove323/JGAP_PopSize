@@ -950,16 +950,20 @@ public class Population implements Serializable, ICloneable, IPersistentRepresen
         return dFitnessSum / m_chromosomes.size();
     }
 
-    public int getLifetime(IChromosome chromosome, double bestFit, double avgFit, double worstFit) {
-        double fitness = chromosome.getFitnessValue();
-        if (fitness <= avgFit) {
-            mLifetime = (int) (MINLIFETIME + 1.0 / 2 * (MAXLIFETIMES - MINLIFETIME) * (fitness - worstFit)
-                    / (avgFit - worstFit));
-        } else {
-            mLifetime = (int) (1.0 / 2 * (MINLIFETIME + MAXLIFETIMES) + 1.0 / 2 * (MAXLIFETIMES - MINLIFETIME)
-                    * (fitness - avgFit) / (bestFit - avgFit));
-        }
+    public int getLifetime() {
         return mLifetime;
     }
 
+    public int lifetimeCal(IChromosome chromosome, int lifetime, double bestFit, double avgFit, double worstFit) {
+        this.mLifetime = lifetime;
+        double fitness = chromosome.getFitnessValue();
+            if (fitness <= avgFit) {
+                mLifetime = (int) (MINLIFETIME + 1.0 / 2 * (MAXLIFETIMES - MINLIFETIME) * (fitness - worstFit)
+                        / (avgFit - worstFit));
+            } else {
+                mLifetime = (int) (1.0 / 2 * (MINLIFETIME + MAXLIFETIMES) + 1.0 / 2 * (MAXLIFETIMES - MINLIFETIME)
+                        * (fitness - avgFit) / (bestFit - avgFit));
+            }
+        return mLifetime;
+    }
 }

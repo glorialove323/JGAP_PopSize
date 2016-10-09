@@ -3,15 +3,11 @@
  */
 package com.gyy.lifetime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jgap.BaseGeneticOperator;
 import org.jgap.Configuration;
-import org.jgap.Gene;
 import org.jgap.Genotype;
-import org.jgap.IChromosome;
-import org.jgap.IGeneConstraintChecker;
 import org.jgap.InvalidConfigurationException;
 import org.jgap.Population;
 
@@ -41,6 +37,11 @@ public class RecombineOperator extends BaseGeneticOperator implements Comparable
         m_reproductionRatio = a_desiredReproductionRatio;
     }
 
+    /*
+     * recombine操作过程
+     * pop(t),每个个体被选中的概率是一样的，用于交叉和变异，那就所有的个体都进行交叉和变异
+     * aux(t),在交叉和变异后的个体，选择ratio * Popsize 个个体
+     */
     //recombine: 生成AuxPopulation
     public void operate(Population a_population, List a_candidateChromosomes) {
         // TODO Auto-generated method stub

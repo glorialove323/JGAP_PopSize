@@ -1123,11 +1123,11 @@ public synchronized void addGeneticOperator(final GeneticOperator
           "A sample instance of the desired Chromosome " +
           "setup must be specified in the active configuration.");
     }
-    if (m_preSelectors.size() == 0 && m_postSelectors.size() == 0) {
+   /* if (m_preSelectors.size() == 0 && m_postSelectors.size() == 0) {
       throw new InvalidConfigurationException(
           "At least one desired natural selector must be specified in the"
           + " active configuration.");
-    }
+    }*/
     if (m_randomGenerator == null) {
       throw new InvalidConfigurationException(
           "A desired random number generator must be specified in the " +

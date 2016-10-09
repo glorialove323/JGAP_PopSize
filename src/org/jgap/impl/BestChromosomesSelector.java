@@ -10,6 +10,7 @@
 package org.jgap.impl;
 
 import java.util.*;
+
 import org.jgap.*;
 import org.jgap.util.*;
 
@@ -138,7 +139,8 @@ public class BestChromosomesSelector
    * @author Klaus Meffert
    * @since 1.1
    */
-  public void selectChromosomes(final int a_howManyToSelect,
+  @SuppressWarnings("unchecked")
+public void selectChromosomes(final int a_howManyToSelect,
                                 Population a_to_pop) {
     int canBeSelected;
     int chromsSize = m_chromosomes.size();
