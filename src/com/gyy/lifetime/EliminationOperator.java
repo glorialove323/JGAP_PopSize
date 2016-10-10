@@ -4,6 +4,7 @@
 package com.gyy.lifetime;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.jgap.BaseGeneticOperator;
@@ -53,57 +54,70 @@ public class EliminationOperator extends BaseGeneticOperator implements Comparab
 
         System.out.println("current population size: " + a_population.size());
 
+        
+        //记录删除的个数
+        int delete = 0;
+        
         /*
          * 根据lifetime和age值进行消除个体 age=0 表示是刚生成的个体，因为lifetime在每个个体出生时只计算一次
          */
-        for (int i = 0; i < a_population.size(); i++) {
+        for (int i = 0; i < a_population.size();) {
             IChromosome a_chromosome = a_population.getChromosome(i);
             int indivLifetime = a_chromosome.getLifetime();
             int indivAge = a_chromosome.getAge();
 
-            System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + " age: " + indivAge);
-
+           // System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + " age: " + indivAge);
+  
+            
             // 不是第一次产生的个体
             if (indivAge != 0 && indivLifetime == 0) {
                 // 如果lifetime为0，说明刚被初始化，需要计算lifetime值
                 indivLifetime = a_population.lifetimeCal(a_chromosome, indivLifetime, bestFit, avgFit, worstFit);
                 a_chromosome.setLifetime(indivLifetime);
-                System.out.println("重新计算过的：indiv [" + i + "]" + " lifetime: " + indivLifetime + " age: " + indivAge);
+             //   System.out.println("重新计算过的：indiv [" + i + "]" + " lifetime: " + indivLifetime + " age: " + indivAge);
                 // 执行删除机制
-                if (indivAge > indivLifetime) {
+                if (indivAge >= indivLifetime) {
                     a_population.getChromosomes().remove(i);
-                    System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + " is removed...");
+                    delete = delete+1;
+               //     System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + " is removed...");
                 } else {
-                    System.out.println("lifetime >= age, cannot be removed...");
+                    i++;
+                //    System.out.println("lifetime >= age, cannot be removed...");
                 }
             } else if (indivAge == 0)
             // 是第一次产生的个体，都需要计算lifetime值
             {
                 indivLifetime = a_population.lifetimeCal(a_chromosome, indivLifetime, bestFit, avgFit, worstFit);
                 a_chromosome.setLifetime(indivLifetime);
-                System.out.println("刚产生的个体计算过的值：indiv [" + i + "]" + " lifetime: " + indivLifetime + " age: "
-                        + indivAge);
+              //  System.out.println("刚产生的个体计算过的值：indiv [" + i + "]" + " lifetime: " + indivLifetime + " age: "
+               //         + indivAge);
                 // 执行删除机制
-                if (indivAge > indivLifetime) {
+                if (indivAge >= indivLifetime) {
                     a_population.getChromosomes().remove(i);
-                    System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + "< age "+indivAge +" is removed...");
+                    delete = delete+1;
+                  //  System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + "< age "+indivAge +" is removed...");
                 } else {
-                    System.out.println("lifetime >= age, cannot be removed...");
+                    i++;
+                  //  System.out.println("lifetime >= age, cannot be removed...");
                 }
             }
             else if(indivAge !=0 && indivLifetime !=0){
                 // 执行删除机制
-                if (indivAge > indivLifetime) {
+                if (indivAge >= indivLifetime) {
                     a_population.getChromosomes().remove(i);
-                    System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + "< age "+indivAge +" is removed...");
+                    delete = delete+1;
+                  //  System.out.println("indiv [" + i + "]" + " lifetime: " + indivLifetime + "< age "+indivAge +" is removed...");
                 } else {
-                    System.out.println("lifetime >= age, cannot be removed...");
+                    i++;
+                   // System.out.println("lifetime >= age, cannot be removed...");
                 }
             }
             continue;
         }
+        System.out.println("delete individuals: "+delete);
         System.out.println("after lifetime, current poplation size:" + a_population.size());
     }
+    
 
     public int compareTo(Object arg0) {
         // TODO Auto-generated method stub

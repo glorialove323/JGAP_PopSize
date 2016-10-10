@@ -48,7 +48,7 @@ public class DeJong1Test {
         
         //开始进化，并计算运行时间
         long startTime = System.currentTimeMillis();
-        for(int i = 0;i<100;i++){
+        for(int i = 0;i<40;i++){
             mPopulation.evolve();
         }
         long endTime = System.currentTimeMillis();

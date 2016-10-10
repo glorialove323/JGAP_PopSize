@@ -153,8 +153,8 @@ public class GABreeder
     // Increase age of all chromosomes which are not modified by genetic
     // operations.
     // -----------------------------------------------------------------
-    int size = Math.min(newChromIndex, currentPopSize);
-    for (int i = 0; i < size; i++) {
+    //int size = Math.min(newChromIndex, currentPopSize);
+    for (int i = 0; i < currentPopSize; i++) {
       IChromosome chrom = pop.getChromosome(i);
       chrom.increaseAge();
       // Mark chromosome as not being operated on.

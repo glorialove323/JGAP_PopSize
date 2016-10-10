@@ -46,9 +46,9 @@ public class LifeTimeConfiguration extends Configuration implements ICloneable{
             setKeepPopulationSizeConstant(false);//dynamic population size
             setFitnessEvaluator(new DefaultFitnessEvaluator());
             setChromosomePool(new ChromosomePool());
-            addGeneticOperator(new RecombineOperator(this, 0.4));//reproduction ratio = 0.4
-            addGeneticOperator(new CrossoverOperator(this, 0.65d));//crossover rate = 0.65
-            addGeneticOperator(new MutationOperator(this, 66)); //mutation rate = 0.015
+           // addGeneticOperator(new CrossoverOperator(this, 0.65d));//crossover rate = 0.65
+           // addGeneticOperator(new MutationOperator(this, 66)); //mutation rate = 0.015
+            addGeneticOperator(new RecombineOperator(this, 0.4,0.65d,66));//reproduction ratio = 0.4
             addGeneticOperator(new EliminationOperator(this));//elimination
         }
         catch(InvalidConfigurationException e){

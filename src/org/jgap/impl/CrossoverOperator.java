@@ -324,6 +324,7 @@ public class CrossoverOperator
                       final List a_candidateChromosomes) {
     // Work out the number of crossovers that should be performed.
     // -----------------------------------------------------------
+    
     int size = Math.min(getConfiguration().getPopulationSize(),
                         a_population.size());
     int numCrossovers = 0;
